@@ -1,0 +1,35 @@
+<nav
+  class="navbar is-fixed-top is-info"
+  role="navigation"
+  aria-label="main navigation">
+  <div class="navbar-brand">
+    <a
+      role="button"
+      class="navbar-burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" [routerLink]="['home']"> Home </a>
+      <a class="navbar-item"> Tous les Sites Disponibles </a>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-light is-link" [routerLink]="['auth/register']">
+            <strong>s'enregistrer</strong>
+          </a>
+          <a class="button is-light is-link" [routerLink]="['auth/login']">
+            Connection
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
