@@ -16,8 +16,7 @@ export class RegisterComponent {
 
   constructor(
     private registerService: RegisterService,
-    private tokenService: TokenService,
-    private router: Router
+    private tokenService: TokenService
   ) {
     this.registerForm = new FormGroup({
       nickName: new FormControl('', [Validators.required, Validators.max(50)]),
@@ -43,7 +42,6 @@ export class RegisterComponent {
     this.registerService.register(credentials).subscribe({
       next: data => {
         this.tokenService.saveToken(data.acces_token, data.idUser);
-        this.router.navigate([this.url]);
       },
       error: err => console.error(err),
     });

@@ -25,13 +25,11 @@
         <a class="navbar-link" [routerLink]="['/user']"> Accueil U </a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item" [routerLink]="['profil']"> Voir mon profil </a>
-          <a class="navbar-item" [routerLink]="['profil/edit']">
+          <a class="navbar-item" [routerLink]="['me']"> Voir mon profil </a>
+          <a class="navbar-item" [routerLink]="['me/edit']">
             Modifier mon profil
           </a>
-          <a class="navbar-item" [routerLink]="['profil/stat']">
-            Voir mes stats
-          </a>
+          <a class="navbar-item" [routerLink]="['me/stat']"> Voir mes stats </a>
         </div>
       </div>
 

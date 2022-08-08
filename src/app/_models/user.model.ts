@@ -11,15 +11,37 @@ export interface IUser {
 }
 
 export class User implements IUser {
-  admin: boolean = false;
-  birthday: string = '';
-  email: string = '';
-  firstName: string = '';
   idUser: number = 0;
-  lastName: string = '';
   nickName: string = '';
+  lastName: string = '';
+  firstName: string = '';
+  email: string = '';
   password: string = '';
+  birthday: string = '';
   sex: string = '';
+  admin: boolean = false;
+
+  constructor(
+    idUser: number,
+    nickName: string,
+    lastName: string,
+    firstName: string,
+    email: string,
+    password: string,
+    birthday: string,
+    sex: string,
+    admin: boolean
+  ) {
+    this.idUser = idUser;
+    this.nickName = nickName;
+    this.lastName = lastName;
+    this.firstName = firstName;
+    this.email = email;
+    this.password = password;
+    this.birthday = birthday;
+    this.sex = sex;
+    this.admin = admin;
+  }
 }
 
 export class RegisterCredential implements IUser {
