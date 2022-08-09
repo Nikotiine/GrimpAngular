@@ -5,12 +5,13 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class TokenService {
-  private url: string = 'user';
+  private urlLogin: string = 'user';
+  private urlLogout: string = '';
   constructor(private router: Router) {}
   saveToken(token: string, idUser: number): void {
     localStorage.setItem('token', token);
     localStorage.setItem('id', String(idUser));
-    this.router.navigate([this.url]);
+    this.router.navigate([this.urlLogin]);
   }
   isLogged(): boolean {
     const token = localStorage.getItem('token');
@@ -18,5 +19,10 @@ export class TokenService {
   }
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  clearToken() {
+    localStorage.clear();
+    this.router.navigate([this.urlLogout]);
   }
 }

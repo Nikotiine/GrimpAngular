@@ -17,6 +17,11 @@ const routes: Routes = [
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'error',
+    loadChildren: () =>
+      import('./_utils/error/error.module').then(m => m.ErrorModule),
+  },
 ];
 
 @NgModule({

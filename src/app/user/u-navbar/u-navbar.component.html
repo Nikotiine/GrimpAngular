@@ -25,11 +25,15 @@
         <a class="navbar-link" [routerLink]="['/user']"> Accueil U </a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item" [routerLink]="['me']"> Voir mon profil </a>
-          <a class="navbar-item" [routerLink]="['me/edit']">
+          <a class="navbar-item" [routerLink]="['profil', id]">
+            Voir mon profil
+          </a>
+          <a class="navbar-item" [routerLink]="['profil/edit', id]">
             Modifier mon profil
           </a>
-          <a class="navbar-item" [routerLink]="['me/stat']"> Voir mes stats </a>
+          <a class="navbar-item" [routerLink]="['profil/stat']">
+            Voir mes stats
+          </a>
         </div>
       </div>
 
@@ -65,7 +69,7 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-danger">
+          <a class="button is-danger" (click)="logout()">
             <strong>Log out</strong>
           </a>
         </div>
