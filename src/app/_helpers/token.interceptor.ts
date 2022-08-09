@@ -5,12 +5,10 @@ import {
   HttpEvent,
   HttpInterceptor,
   HTTP_INTERCEPTORS,
-  HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { TokenService } from '../_service/token.service';
 import { ErrorService } from '../_service/error.service';
-import { IUser } from '../_models/user.model';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -33,9 +31,9 @@ export class TokenInterceptor implements HttpInterceptor {
 
       return next.handle(requestClone).pipe(
         // @ts-ignore
-        catchError((err: HttpErrorResponse) => {
+        catchError(err => {
           this.errorService.error(err.status);
-          return throwError(err);
+          return of(err.status);
         })
       );
     }

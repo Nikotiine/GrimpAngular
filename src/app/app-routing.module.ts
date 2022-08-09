@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './_helpers/auth.guard';
+import { ErrorComponent } from './_utils/error/error.component';
 
 const routes: Routes = [
   {
@@ -18,10 +19,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'error',
-    loadChildren: () =>
-      import('./_utils/error/error.module').then(m => m.ErrorModule),
+    path: 'error/:err',
+    component: ErrorComponent,
   },
+  { path: '**', redirectTo: 'error/404' },
 ];
 
 @NgModule({
