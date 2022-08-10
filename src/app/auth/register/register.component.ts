@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../../_service/register.service';
 import { RegisterCredential } from '../../_models/user.model';
 import { TokenService } from '../../_service/token.service';
 import { Router } from '@angular/router';
+import { PseudoMailValidatorDirective } from '../../_helpers/pseudo-mail-validator.directive';
 
 @Component({
   selector: 'app-register',
@@ -12,17 +13,21 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  private url: string = 'user';
 
   constructor(
     private registerService: RegisterService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private validatorE: PseudoMailValidatorDirective
   ) {
     this.registerForm = new FormGroup({
       nickName: new FormControl('', [Validators.required, Validators.max(50)]),
       lastName: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        this.validatorE.validate,
+      ]),
       password: new FormControl('', Validators.required),
       birthday: new FormControl('', Validators.required),
       sex: new FormControl('', Validators.required),

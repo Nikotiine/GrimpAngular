@@ -8,12 +8,12 @@ import { IToken } from '../_models/i-token';
   providedIn: 'root',
 })
 export class RegisterService {
-  private url: string = 'api/register';
+  private urlRegister: string = 'api/register';
 
   constructor(private http: HttpClient) {}
 
   public register(credentials: IUser): Observable<IToken> {
     console.log(credentials);
-    return this.http.post<IToken>(this.url, credentials);
+    return this.http.post<IToken>(this.urlRegister, credentials);
   }
 }

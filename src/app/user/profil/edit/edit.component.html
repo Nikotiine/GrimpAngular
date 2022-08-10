@@ -1,21 +1,39 @@
 <h1 class="title is-2 box has-text-centered">Modifier mon profil</h1>
-<form name="form" class="register-form">
+<form name="form" class="register-form" [formGroup]="editFrom">
   <div class="field">
     <label class="label">Pseudo</label>
     <div class="control">
-      <input class="input" type="text" name="nickName" placeholder="Pseudo" />
+      <input
+        class="input"
+        type="text"
+        name="nickName"
+        placeholder="Pseudo"
+        formControlName="nickName"
+        [(ngModel)]="user.nickName" />
     </div>
   </div>
   <div class="field">
     <label class="label">Nom</label>
     <div class="control">
-      <input class="input" type="text" name="lastName" placeholder="Nom" />
+      <input
+        class="input"
+        type="text"
+        name="lastName"
+        placeholder="Nom"
+        formControlName="lastName"
+        [(ngModel)]="user.lastName" />
     </div>
   </div>
   <div class="field">
     <label class="label">Prenom</label>
     <div class="control">
-      <input class="input" type="text" name="firstName" placeholder="Prenom" />
+      <input
+        class="input"
+        type="text"
+        name="firstName"
+        placeholder="Prenom"
+        formControlName="firstName"
+        [(ngModel)]="user.firstName" />
     </div>
   </div>
 
@@ -26,31 +44,50 @@
         class="input"
         type="email"
         name="email"
-        placeholder="ex: johndoe@gmail.com" />
+        placeholder="ex: johndoe@gmail.com"
+        formControlName="email"
+        [(ngModel)]="user.email" />
     </div>
   </div>
   <div class="field">
     <label class="label">Date de naissance</label>
     <div class="control">
-      <input class="input" type="date" name="birthday" />
+      <input
+        class="input"
+        type="date"
+        name="birthday"
+        formControlName="birthday"
+        [(ngModel)]="userBirthday" />
     </div>
   </div>
   <div class="control">
     <label class="radio">
-      <input type="radio" name="sex" value="M" />
+      <input
+        type="radio"
+        name="sex"
+        value="M"
+        formControlName="sex"
+        [(ngModel)]="user.sex" />
       homme
     </label>
     <label class="radio">
-      <input type="radio" name="sex" value="F" />
+      <input
+        type="radio"
+        name="sex"
+        value="F"
+        formControlName="sex"
+        [(ngModel)]="user.sex" />
       femme
     </label>
   </div>
   <div class="field is-grouped is-justify-content-flex-end">
     <div class="control">
-      <button class="button is-link">Submit</button>
+      <button class="button is-link" (click)="editProfil()">Modifier</button>
     </div>
     <div class="control">
-      <a class="button is-link is-light">Cancel</a>
+      <a class="button is-link is-light" [routerLink]="['/user/home']"
+        >Cancel</a
+      >
     </div>
   </div>
 </form>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IUser } from '../../../_models/user.model';
+import { User } from '../../../_models/user.model';
 import { UserService } from '../../../_service/user.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { UserService } from '../../../_service/user.service';
   styleUrls: ['./me.component.scss'],
 })
 export class MeComponent implements OnInit {
-  user: IUser = {
+  user: User = {
     admin: false,
     birthday: '',
     email: '',
