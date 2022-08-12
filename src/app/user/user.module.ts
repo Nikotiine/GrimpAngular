@@ -5,13 +5,15 @@ import { UserRoutingModule } from './user-routing.module';
 import { ULayoutComponent } from './u-layout/u-layout.component';
 import { UNavbarComponent } from './u-navbar/u-navbar.component';
 import { UHomeComponent } from './u-home/u-home.component';
+import { CardComponent } from './components/card/card.component';
 
 
 @NgModule({
   declarations: [
     ULayoutComponent,
     UNavbarComponent,
-    UHomeComponent
+    UHomeComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,

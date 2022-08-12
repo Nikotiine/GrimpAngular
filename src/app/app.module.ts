@@ -7,12 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { TokenInterceptorProvider } from './_helpers/token.interceptor';
 import { ErrorComponent } from './_utils/error/error.component';
 import { DatePipe } from '@angular/common';
-import { PseudoMailValidatorDirective } from './_helpers/pseudo-mail-validator.directive';
 
 @NgModule({
-  declarations: [AppComponent, ErrorComponent, PseudoMailValidatorDirective],
+  declarations: [AppComponent, ErrorComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [TokenInterceptorProvider, DatePipe],
   bootstrap: [AppComponent],
+  exports: [],
 })
 export class AppModule {}

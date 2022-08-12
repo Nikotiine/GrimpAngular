@@ -11,6 +11,8 @@ import { TokenService } from '../../_service/token.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  isInvalid: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private loginService: LoginService,
@@ -32,7 +34,11 @@ export class LoginComponent {
         this.tokenService.saveToken(data.acces_token, data.idUser);
       },
       error: err => {
-        console.log(err);
+        this.isInvalid = true;
+        setTimeout(() => {
+          this.isInvalid = false;
+        }, 3000);
+        this.errorMessage = err.error.text;
       },
     });
   }

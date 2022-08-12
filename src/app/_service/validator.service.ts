@@ -10,7 +10,7 @@ export class ValidatorService {
   private getAllPseudoAndMailUrl: string = 'api/public/validator';
   constructor(private http: HttpClient) {}
 
-  getAllPseudoAndMail(): Observable<IListPseudoMail[]> {
-    return this.http.get<IListPseudoMail[]>(this.getAllPseudoAndMailUrl);
+  getAllPseudoAndMail(): Observable<IListPseudoMail> {
+    return this.http.get<IListPseudoMail>(this.getAllPseudoAndMailUrl);
   }
 }

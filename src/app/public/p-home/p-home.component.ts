@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { PseudoMailValidatorDirective } from '../../_helpers/pseudo-mail-validator.directive';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-p-home',

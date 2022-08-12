@@ -1,4 +1,7 @@
-<h1 class="title is-2 box has-text-centered">Formulaire d'enregistrement</h1>
+<div class="box">
+  <h1 class="title is-2 has-text-centered">Formulaire d'enregistrement</h1>
+</div>
+
 <form name="form" class="register-form" [formGroup]="registerForm">
   <div class="field">
     <label class="label">Pseudo</label>
@@ -85,3 +88,4 @@
     </div>
   </div>
 </form>
+<app-error-toast *ngIf="isInvalid" [message]="errorMessage"></app-error-toast>

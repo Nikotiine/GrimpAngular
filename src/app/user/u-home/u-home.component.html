@@ -1,1 +1,5 @@
-<p>u-home works!</p>
+<div class="is-flex">
+  <div *ngFor="let card of cardData">
+    <app-card [data]="card"></app-card>
+  </div>
+</div>
