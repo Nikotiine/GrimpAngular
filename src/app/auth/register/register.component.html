@@ -43,9 +43,22 @@
       <input
         class="input"
         type="email"
+        [ngClass]="{
+          'is-danger':
+            !registerForm.controls['email'].valid &&
+            registerForm.controls['email'].dirty
+        }"
         name="email"
         placeholder="ex: johndoe@gmail.com"
         formControlName="email" />
+      <span
+        *ngIf="
+          !registerForm.controls['email'].valid &&
+          registerForm.controls['email'].dirty
+        "
+        class="has-text-danger"
+        >Adresse mail invalide</span
+      >
     </div>
   </div>
   <div class="field">
@@ -81,11 +94,16 @@
   </div>
   <div class="field is-grouped is-justify-content-flex-end">
     <div class="control">
-      <button class="button is-link" (click)="register()">Submit</button>
+      <button
+        class="button is-link"
+        (click)="register()"
+        [disabled]="!registerForm.valid">
+        Submit
+      </button>
     </div>
     <div class="control">
       <a [routerLink]="['']" class="button is-link is-light">Cancel</a>
     </div>
   </div>
 </form>
-<app-error-toast *ngIf="isInvalid" [message]="errorMessage"></app-error-toast>
+<app-errors-taost *ngIf="isInvalid" [message]="errorMessage"></app-errors-taost>

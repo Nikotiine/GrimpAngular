@@ -80,9 +80,29 @@
       femme
     </label>
   </div>
+  <div class="field mt-6">
+    <label class="label">Confirmer votre mot de passe </label
+    ><span
+      ><a [routerLink]="['/user/profil/change-psw/' + id]"
+        >(changer de mot de passe)</a
+      ></span
+    >
+    <div class="control mt-3">
+      <input
+        class="input"
+        type="password"
+        name="password"
+        formControlName="password" />
+    </div>
+  </div>
   <div class="field is-grouped is-justify-content-flex-end">
     <div class="control">
-      <button class="button is-link" (click)="editProfil()">Modifier</button>
+      <button
+        class="button is-link"
+        (click)="editProfil($event)"
+        [disabled]="!editFrom.valid">
+        Modifier
+      </button>
     </div>
     <div class="control">
       <a class="button is-link is-light" [routerLink]="['/user/home']"
@@ -91,3 +111,8 @@
     </div>
   </div>
 </form>
+<app-errors-taost [message]="messageError" *ngIf="requestError">
+</app-errors-taost>
+<app-validate-toast
+  [message]="messageRequestValide"
+  *ngIf="requestValide"></app-validate-toast>

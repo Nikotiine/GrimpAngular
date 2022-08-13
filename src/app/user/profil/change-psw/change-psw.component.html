@@ -1,0 +1,41 @@
+<form class="changePswForm" [formGroup]="changePswForm">
+  <div class="field">
+    <label class="label">Ancien mot de passe</label>
+    <div class="control">
+      <input
+        class="input"
+        type="password"
+        name="oldPassword"
+        formControlName="oldPassword" />
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Email</label>
+    <div class="control">
+      <input
+        class="input"
+        type="password"
+        name="newPassword"
+        formControlName="newPassword" />
+    </div>
+  </div>
+  <div class="field is-grouped is-justify-content-flex-end">
+    <div class="control">
+      <button class="button is-link" (click)="onSubmit($event)">Valider</button>
+    </div>
+    <div class="control">
+      <a
+        [routerLink]="['/user/profil/edit/' + id]"
+        class="button is-link is-light"
+        >Cancel</a
+      >
+    </div>
+  </div>
+</form>
+<app-validate-toast
+  [message]="messageRequestValide"
+  *ngIf="requestValide"></app-validate-toast>
+<app-errors-taost
+  [message]="messageError"
+  *ngIf="requestError"></app-errors-taost>

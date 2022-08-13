@@ -6,10 +6,12 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ErrorToastComponent } from './error-toast/error-toast.component';
+
+import { UtilsModule } from '../_utils/utils.module';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, LogoutComponent, ErrorToastComponent],
-  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule],
+  declarations: [LoginComponent, RegisterComponent, LogoutComponent],
+  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule, UtilsModule],
+  exports: [],
 })
 export class AuthModule {}

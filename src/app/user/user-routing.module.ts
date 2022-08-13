@@ -15,10 +15,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./profil/profil.module').then(m => m.ProfilModule),
       },
-      {
-        path: '**',
-        redirectTo: '/error/404',
-      },
     ],
   },
 ];

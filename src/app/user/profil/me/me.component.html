@@ -7,4 +7,6 @@
     Date de naissance {{ user.birthday }} <br />
     Role : {{ user.admin ? 'Admin' : 'Utilisateur' }}
   </p>
+  <app-errors-taost [message]="messageError" *ngIf="requestError">
+  </app-errors-taost>
 </div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './_helpers/auth.guard';
-import { ErrorComponent } from './_utils/error/error.component';
+import { NotFoundComponent } from './_utils/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -19,10 +19,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'error/:err',
-    component: ErrorComponent,
+    path: '**',
+    redirectTo: '404',
+    pathMatch: 'full',
   },
-  { path: '**', redirectTo: 'error/404' },
+  { path: '404', component: NotFoundComponent },
 ];
 
 @NgModule({

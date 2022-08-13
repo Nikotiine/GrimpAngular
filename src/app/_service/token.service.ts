@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 })
 export class TokenService {
   private urlLogin: string = 'user';
-  private urlLogout: string = '';
+
   constructor(private router: Router) {}
   saveToken(token: string, idUser: number): void {
     localStorage.setItem('token', token);
@@ -23,6 +23,5 @@ export class TokenService {
 
   clearToken() {
     localStorage.clear();
-    this.router.navigate([this.urlLogout]);
   }
 }

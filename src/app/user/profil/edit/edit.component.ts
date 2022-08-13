@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EditCredential, IUser } from '../../../_models/user.model';
+import { EditCredential, IUser, User } from '../../../_models/user.model';
 import { UserService } from '../../../_service/user.service';
 import { DatePipe } from '@angular/common';
 
@@ -11,9 +11,14 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./edit.component.scss'],
 })
 export class EditComponent implements OnInit {
-  private id: number = 0;
+  public id: number = 0;
   private redirectUrl: string = '/user/profil/';
+  public requestError: boolean = false;
+  public messageError: string = '';
+  public requestValide: boolean = false;
+  public messageRequestValide = 'Profil Correctement modifié';
   editFrom: FormGroup;
+
   user: IUser = {
     birthday: '',
     email: '',
@@ -38,6 +43,7 @@ export class EditComponent implements OnInit {
       firstName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       birthday: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
       sex: new FormControl('', Validators.required),
     });
   }
@@ -52,7 +58,7 @@ export class EditComponent implements OnInit {
           data.birthday,
           'yyyy-MM-dd'
         );
-        console.log(this.user.sex);
+        console.log(this.userBirthday);
       },
       error: err => {
         console.log(err);
@@ -60,23 +66,33 @@ export class EditComponent implements OnInit {
     });
   }
 
-  editProfil(): any {
+  editProfil($event: any): any {
+    $event.stopPropagation();
     const credentials: EditCredential = new EditCredential(
       this.id,
       this.editFrom.controls['nickName'].value,
       this.editFrom.controls['lastName'].value,
       this.editFrom.controls['firstName'].value,
       this.editFrom.controls['email'].value,
+      this.editFrom.controls['password'].value,
       this.editFrom.controls['birthday'].value,
       this.editFrom.controls['sex'].value
     );
+
     console.log(credentials);
     this.userService.editProfil(this.id, credentials).subscribe({
       next: data => {
-        this.router.navigate([this.redirectUrl + data.idUser]);
+        this.requestValide = true;
+        setTimeout(() => {
+          this.router.navigate([this.redirectUrl + data.idUser]);
+        }, 2500);
       },
       error: err => {
-        console.log(err);
+        this.requestError = true;
+        this.messageError = err.error;
+        setTimeout(() => {
+          this.requestError = false;
+        }, 2500);
       },
     });
   }

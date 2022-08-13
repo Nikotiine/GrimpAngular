@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../_models/user.model';
 import { UserService } from '../../../_service/user.service';
+import { ErrorService } from '../../../_service/error.service';
 
 @Component({
   selector: 'app-me',
@@ -21,9 +22,12 @@ export class MeComponent implements OnInit {
     sex: '',
   };
   private id: number = 0;
+  public requestError: boolean = false;
+  public messageError: string = '';
   constructor(
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +35,13 @@ export class MeComponent implements OnInit {
     this.userService.getProfil(this.id).subscribe({
       next: data => {
         this.user = data;
+      },
+      error: err => {
+        this.requestError = true;
+        this.messageError = err.statusText;
+        setTimeout(() => {
+          this.errorService.error(err.status);
+        }, 2000);
       },
     });
   }

@@ -22,20 +22,24 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const acces_token = this.tokenService.getToken();
-    console.log(acces_token);
+
     if (acces_token !== null) {
       let requestClone = request.clone({
         headers: request.headers.set('Authorization', 'bearer ' + acces_token),
       });
       console.log(requestClone);
 
-      return next.handle(requestClone).pipe(
+      return next.handle(requestClone);
+      /*.pipe(
         // @ts-ignore
         catchError(err => {
+          console.log('interceptor error');
+          console.log(err);
           this.errorService.error(err.status);
+
           return of(err.status);
         })
-      );
+      );*/
     }
     return next.handle(request);
   }

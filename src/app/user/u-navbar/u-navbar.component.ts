@@ -17,6 +17,7 @@ export class UNavbarComponent implements OnInit {
 
   logout() {
     this.tokenService.clearToken();
+    this.userService.logout();
   }
   isAdmin() {
     this.userService.getProfil(this.id).subscribe({

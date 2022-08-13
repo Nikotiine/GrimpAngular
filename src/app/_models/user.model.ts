@@ -78,6 +78,7 @@ export class EditCredential implements IUser {
   lastName: string;
   firstName: string;
   email: string;
+  password: string;
   birthday: string;
   sex: string;
 
@@ -87,6 +88,7 @@ export class EditCredential implements IUser {
     lastName: string,
     firstName: string,
     email: string,
+    password: string,
     birthday: string,
     sex: string
   ) {
@@ -95,6 +97,7 @@ export class EditCredential implements IUser {
     this.lastName = lastName;
     this.firstName = firstName;
     this.email = email;
+    this.password = password;
     this.birthday = birthday;
     this.sex = sex;
   }
