@@ -44,19 +44,13 @@
         class="input"
         type="email"
         [ngClass]="{
-          'is-danger':
-            !registerForm.controls['email'].valid &&
-            registerForm.controls['email'].dirty
+          'is-danger': emailInputIsValid(),
+          'is-success': registerForm.controls['email'].valid
         }"
         name="email"
         placeholder="ex: johndoe@gmail.com"
         formControlName="email" />
-      <span
-        *ngIf="
-          !registerForm.controls['email'].valid &&
-          registerForm.controls['email'].dirty
-        "
-        class="has-text-danger"
+      <span *ngIf="emailInputIsValid()" class="has-text-danger"
         >Adresse mail invalide</span
       >
     </div>

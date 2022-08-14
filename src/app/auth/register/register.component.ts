@@ -29,6 +29,12 @@ export class RegisterComponent {
     });
   }
 
+  emailInputIsValid(): boolean {
+    return (
+      !this.registerForm.controls['email'].valid &&
+      this.registerForm.controls['email'].touched
+    );
+  }
   register() {
     const credentials: RegisterCredential = new RegisterCredential(
       this.registerForm.controls['nickName'].value,

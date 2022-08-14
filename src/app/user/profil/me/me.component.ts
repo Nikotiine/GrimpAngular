@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../_models/user.model';
 import { UserService } from '../../../_service/user.service';
 import { ErrorService } from '../../../_service/error.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-me',

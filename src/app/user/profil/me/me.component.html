@@ -1,10 +1,10 @@
 <div class="box">
-  <h2>Profil de {{ user.nickName }}</h2>
+  <h2 class="title is-3">Profil de {{ user.nickName }}</h2>
   <p>
     Nom : {{ user.lastName }} <br />
     Prenom : {{ user.firstName }} <br />
     Email : {{ user.email }} <br />
-    Date de naissance {{ user.birthday }} <br />
+    Date de naissance {{ user.birthday | date: 'dd/MM/yyyy' }} <br />
     Role : {{ user.admin ? 'Admin' : 'Utilisateur' }}
   </p>
   <app-errors-taost [message]="messageError" *ngIf="requestError">
