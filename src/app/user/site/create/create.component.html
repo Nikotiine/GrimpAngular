@@ -1,1 +1,87 @@
-<p>create works!</p>
+<h1 class="title is-2 has-text-centered">Ajout d'un site</h1>
+<form class="form-new-site">
+  <div class="">
+    <div class="is-flex is-justify-content-space-between is-align-items-center">
+      <div class="field">
+        <label class="label"
+          >Nom du site <input type="text" name="name" class="input width-input"
+        /></label>
+      </div>
+      <div class="select is-medium">
+        <select>
+          <option>Niveau Mini</option>
+          <option *ngFor="let level of levels">{{ level.designation }}</option>
+        </select>
+      </div>
+      <div class="select is-medium">
+        <select>
+          <option>Niveau Maxi</option>
+          <option *ngFor="let level of levels">{{ level.designation }}</option>
+        </select>
+      </div>
+    </div>
+    <div
+      class="mt-4 is-flex is-justify-content-space-between is-align-items-center">
+      <div class="field">
+        <label class="label"
+          >Temps d'approche
+          <input type="number" name="temps" class="input width-input"
+        /></label>
+      </div>
+      <div class="select is-medium">
+        <select>
+          <option>Type d'approche</option>
+          <option *ngFor="let type of approachTypes">{{ type.type }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="is-flex is-justify-content-space-between mt-6">
+      <div class="select is-medium">
+        <select>
+          <option>Equipement en place</option>
+          <option *ngFor="let equipment of equipments">
+            {{ equipment.libelle }}
+          </option>
+        </select>
+      </div>
+      <div class="select is-medium width-select">
+        <select>
+          <option>Qualite de l'equipement</option>
+          <option *ngFor="let equipment of equipments">
+            {{ equipment.libelle }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="is-flex is-justify-content-space-between mt-6">
+      <div class="select is-medium">
+        <select>
+          <option>Exposition</option>
+          <option *ngFor="let exposition of directions">
+            {{ exposition.direction }}
+          </option>
+        </select>
+      </div>
+      <div class="select is-medium">
+        <select>
+          <option>Type de rocher</option>
+          <option *ngFor="let type of rockTypes">{{ type.type }}</option>
+        </select>
+      </div>
+      <div class="select is-medium">
+        <select>
+          <option>Profil des voies</option>
+          <option *ngFor="let profil of profils">{{ profil.profil }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="field is-grouped is-justify-content-center mt-6">
+    <div class="control">
+      <button class="button is-link is-medium">Suivant</button>
+    </div>
+    <div class="control">
+      <a class="button is-medium" [routerLink]="['/user/home']">Cancel</a>
+    </div>
+  </div>
+</form>
