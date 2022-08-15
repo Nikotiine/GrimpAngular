@@ -1,84 +1,229 @@
 <h1 class="title is-2 has-text-centered">Ajout d'un site</h1>
-<form class="form-new-site">
+<form class="form-new-site" [formGroup]="createForm">
   <div class="">
-    <div class="is-flex is-justify-content-space-between is-align-items-center">
-      <div class="field">
-        <label class="label"
-          >Nom du site <input type="text" name="name" class="input width-input"
-        /></label>
+    <fieldset class="fielset">
+      <legend class="has-text-centered subtitle is-4">
+        Info generale du site
+      </legend>
+      <div
+        class="is-flex is-justify-content-space-between is-align-items-center p-2">
+        <div class="field">
+          <label class="label"
+            >Nom du site
+            <input
+              type="text"
+              name="name"
+              class="input width-input"
+              formControlName="name"
+          /></label>
+        </div>
+        <div class="select is-medium">
+          <select formControlName="minimumLevel">
+            <option value="">Niveau Mini</option>
+            <option *ngFor="let level of levels" value="{{ level.idLevel }}">
+              {{ level.designation }}
+            </option>
+          </select>
+        </div>
+        <div class="select is-medium">
+          <select formControlName="maximumLevel">
+            <option value="">Niveau Maxi</option>
+            <option *ngFor="let level of levels" value="{{ level.idLevel }}">
+              {{ level.designation }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="select is-medium">
-        <select>
-          <option>Niveau Mini</option>
-          <option *ngFor="let level of levels">{{ level.designation }}</option>
-        </select>
+    </fieldset>
+    <fieldset class="fielset">
+      <legend class="has-text-centered subtitle is-4">
+        Info marche d'approche
+      </legend>
+      <div class="container-fielset">
+        <div class="field">
+          <label class="label"
+            >Temps d'approche
+            <input
+              type="number"
+              name="temps"
+              class="input width-input"
+              formControlName="approachTime"
+          /></label>
+        </div>
+        <div class="select is-medium">
+          <select formControlName="approachType">
+            <option value="">Type d'approche</option>
+            <option
+              *ngFor="let type of approachTypes"
+              value="{{ type.idApprochType }}">
+              {{ type.type }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="select is-medium">
-        <select>
-          <option>Niveau Maxi</option>
-          <option *ngFor="let level of levels">{{ level.designation }}</option>
-        </select>
+    </fieldset>
+    <fieldset class="fielset">
+      <legend class="has-text-centered subtitle is-4">
+        Info sur l'equipement en place
+      </legend>
+      <div class="container-fielset">
+        <div class="select is-medium">
+          <select formControlName="equipment">
+            <option value="">Equipement en place</option>
+            <option
+              *ngFor="let equipment of equipments"
+              value="{{ equipment.idEquipment }}">
+              {{ equipment.libelle }}
+            </option>
+          </select>
+        </div>
+        <div class="select is-medium width-select">
+          <select formControlName="equimentQuality">
+            <option value="">Qualite de l'equipement</option>
+            <option
+              *ngFor="let quality of equipmentQualityList"
+              value="{{ quality.idEquipmentQuality }}">
+              {{ quality.quality }}
+            </option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div
-      class="mt-4 is-flex is-justify-content-space-between is-align-items-center">
-      <div class="field">
-        <label class="label"
-          >Temps d'approche
-          <input type="number" name="temps" class="input width-input"
-        /></label>
+    </fieldset>
+    <fieldset class="fielset">
+      <legend class="has-text-centered subtitle is-4">
+        Info exposition et rocher
+      </legend>
+      <div class="container-fielset">
+        <div class="select is-medium">
+          <select formControlName="direction">
+            <option value="">Exposition</option>
+            <option
+              *ngFor="let exposition of directions"
+              value="{{ exposition.idDirections }}">
+              {{ exposition.direction }}
+            </option>
+          </select>
+        </div>
+        <div class="select is-medium">
+          <select formControlName="rockType">
+            <option value="">Type de rocher</option>
+            <option
+              *ngFor="let type of rockTypes"
+              value="{{ type.idRockType }}">
+              {{ type.type }}
+            </option>
+          </select>
+        </div>
+        <div class="select is-medium">
+          <select formControlName="routProfil">
+            <option value="">Profil des voies</option>
+            <option
+              *ngFor="let profil of profils"
+              value="{{ profil.idRoutProfil }}">
+              {{ profil.profil }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="select is-medium">
-        <select>
-          <option>Type d'approche</option>
-          <option *ngFor="let type of approachTypes">{{ type.type }}</option>
-        </select>
-      </div>
-    </div>
-    <div class="is-flex is-justify-content-space-between mt-6">
-      <div class="select is-medium">
-        <select>
-          <option>Equipement en place</option>
-          <option *ngFor="let equipment of equipments">
-            {{ equipment.libelle }}
-          </option>
-        </select>
-      </div>
-      <div class="select is-medium width-select">
-        <select>
-          <option>Qualite de l'equipement</option>
-          <option *ngFor="let equipment of equipments">
-            {{ equipment.libelle }}
-          </option>
-        </select>
-      </div>
-    </div>
-    <div class="is-flex is-justify-content-space-between mt-6">
-      <div class="select is-medium">
-        <select>
-          <option>Exposition</option>
-          <option *ngFor="let exposition of directions">
-            {{ exposition.direction }}
-          </option>
-        </select>
-      </div>
-      <div class="select is-medium">
-        <select>
-          <option>Type de rocher</option>
-          <option *ngFor="let type of rockTypes">{{ type.type }}</option>
-        </select>
-      </div>
-      <div class="select is-medium">
-        <select>
-          <option>Profil des voies</option>
-          <option *ngFor="let profil of profils">{{ profil.profil }}</option>
-        </select>
-      </div>
-    </div>
+    </fieldset>
   </div>
+  <fieldset class="fielset">
+    <legend class="has-text-centered subtitle is-4">Info Geoloc Parking</legend>
+    <div class="container-fielset">
+      <div class="field">
+        <label class="label"
+          >latitude
+          <input
+            type="number"
+            name="latitudeP1"
+            class="input width-input"
+            formControlName="latitudeP1"
+        /></label>
+      </div>
+      <div class="control">
+        <button
+          class="button is-link is-light is-rounded"
+          (click)="addParkingAlternatif($event)">
+          Parking alternatif ?
+        </button>
+      </div>
+      <div class="field">
+        <label class="label"
+          >longitude
+          <input
+            type="number"
+            name="longitudeP1"
+            class="input width-input"
+            formControlName="longitudeP1"
+        /></label>
+      </div>
+    </div>
+  </fieldset>
+  <div *ngIf="parkingAlternatif">
+    <fieldset class="fielset">
+      <legend class="has-text-centered subtitle is-4">
+        Info Geoloc Parking camion
+      </legend>
+      <div class="container-fielset">
+        <div class="field">
+          <label class="label"
+            >latitude
+            <input
+              type="number"
+              name="latitudeP2"
+              class="input width-input"
+              formControlName="latitudeP2"
+          /></label>
+        </div>
+        <div class="field">
+          <label class="label"
+            >longitude
+            <input
+              type="number"
+              name="longitudeP2"
+              class="input width-input"
+              formControlName="longitudeP2"
+          /></label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <fieldset class="fielset">
+    <legend class="has-text-centered subtitle is-4">
+      Info confort parking
+    </legend>
+    <div class="container-fielset">
+      <div class="">
+        <label class="checkbox label">
+          <input type="checkbox" formControlName="reseau4g" />
+          Reseau 4G
+        </label>
+      </div>
+      <div class="">
+        <label class="checkbox label">
+          <input type="checkbox" formControlName="water" />
+          Eau Potable
+        </label>
+      </div>
+      <div class="">
+        <label class="checkbox label">
+          <input type="checkbox" formControlName="toilette" />
+          Toilette
+        </label>
+      </div>
+      <div class="">
+        <label class="checkbox label">
+          <input type="checkbox" formControlName="river" />
+          Lac ou riviere
+        </label>
+      </div>
+    </div>
+  </fieldset>
   <div class="field is-grouped is-justify-content-center mt-6">
     <div class="control">
-      <button class="button is-link is-medium">Suivant</button>
+      <button class="button is-link is-medium" (click)="onSubmit($event)">
+        Suivant
+      </button>
     </div>
     <div class="control">
       <a class="button is-medium" [routerLink]="['/user/home']">Cancel</a>

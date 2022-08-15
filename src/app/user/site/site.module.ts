@@ -6,18 +6,15 @@ import { CreateComponent } from './create/create.component';
 import { AllComponent } from './all/all.component';
 import { DetailComponent } from './detail/detail.component';
 import { SearchComponent } from './search/search.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     CreateComponent,
     AllComponent,
     DetailComponent,
-    SearchComponent
+    SearchComponent,
   ],
-  imports: [
-    CommonModule,
-    SiteRoutingModule
-  ]
+  imports: [CommonModule, SiteRoutingModule, ReactiveFormsModule],
 })
-export class SiteModule { }
+export class SiteModule {}

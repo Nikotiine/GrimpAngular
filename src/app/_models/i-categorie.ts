@@ -5,6 +5,7 @@ export interface ICategorie {
   levelList: level[];
   rockTypeList: rockType[];
   routProfilList: routProfil[];
+  equipmentQualityList: equipmentQuality[];
 }
 export interface approchType {
   idApprochType: number;
@@ -27,6 +28,10 @@ export interface rockType {
   type: string;
 }
 export interface routProfil {
-  idDRoutProfil: number;
+  idRoutProfil: number;
   profil: string;
+}
+export interface equipmentQuality {
+  idEquipmentQuality: number;
+  quality: string;
 }

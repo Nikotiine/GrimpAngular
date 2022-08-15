@@ -9,3 +9,14 @@
 .width-select{
   min-width: 15rem;
 }
+.fielset{
+  border: 1px solid black;
+  margin-top: 1rem;
+}
+.container-fielset{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+
+}
