@@ -12,6 +12,8 @@ export interface ISiteCredential {
   direction: number;
   rockType: number;
   routProfil: number;
+  averageRout: number;
+  nbSecteur: number;
   latitudeP1: number;
   longitudeP1: number;
   latitudeP2?: number;
@@ -32,6 +34,8 @@ export class SiteCredential implements ISiteCredential {
   direction: number = 0;
   rockType: number = 0;
   routProfil: number = 0;
+  averageRout: number = 0;
+  nbSecteur: number = 0;
   latitudeP1: number = 0;
   longitudeP1: number = 0;
   latitudeP2: number = 0;
@@ -52,6 +56,8 @@ export class SiteCredential implements ISiteCredential {
     direction: number,
     rockType: number,
     routProfil: number,
+    averageRout: number,
+    nbSecteur: number,
     latitudeP1: number,
     longitudeP1: number,
     latitudeP2: number,
@@ -71,6 +77,8 @@ export class SiteCredential implements ISiteCredential {
     this.direction = direction;
     this.rockType = rockType;
     this.routProfil = routProfil;
+    this.averageRout = averageRout;
+    this.nbSecteur = nbSecteur;
     this.latitudeP1 = latitudeP1;
     this.longitudeP1 = longitudeP1;
     this.latitudeP2 = latitudeP2;

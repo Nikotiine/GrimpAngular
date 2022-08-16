@@ -7,6 +7,7 @@ import { AllComponent } from './all/all.component';
 import { DetailComponent } from './detail/detail.component';
 import { SearchComponent } from './search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateSecteurComponent } from './create-secteur/create-secteur.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AllComponent,
     DetailComponent,
     SearchComponent,
+    CreateSecteurComponent,
   ],
   imports: [CommonModule, SiteRoutingModule, ReactiveFormsModule],
 })

@@ -1,0 +1,38 @@
+<form [formGroup]="form">
+  <div class="field" formArrayName="secteurs">
+    <div *ngFor="let secteurForm of secteurs.controls; let i = index">
+      <div [formGroupName]="i">
+        <label class="label"
+          >Nom du Secteur
+          <input
+            type="text"
+            class="input width-input mb-2"
+            [ngClass]="{
+              'is-danger': !secteurForm.valid
+            }"
+            formControlName="name"
+        /></label>
+      </div>
+    </div>
+  </div>
+  <div class="field is-grouped is-justify-content-center mt-6">
+    <div class="control">
+      <button class="button is-danger is-light is-medium" (click)="del()">
+        -
+      </button>
+    </div>
+    <div class="control">
+      <button class="button is-primary is-light is-medium" (click)="add()">
+        Ajouter
+      </button>
+    </div>
+    <div class="control">
+      <button
+        class="button is-primary is-light is-medium"
+        (click)="save()"
+        type="submit">
+        save
+      </button>
+    </div>
+  </div>
+</form>

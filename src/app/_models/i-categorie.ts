@@ -6,6 +6,7 @@ export interface ICategorie {
   rockTypeList: rockType[];
   routProfilList: routProfil[];
   equipmentQualityList: equipmentQuality[];
+  averageRoutNumberList: averageRout[];
 }
 export interface approchType {
   idApprochType: number;
@@ -34,4 +35,8 @@ export interface routProfil {
 export interface equipmentQuality {
   idEquipmentQuality: number;
   quality: string;
+}
+export interface averageRout {
+  idAverageRoutNumber: number;
+  libelle: string;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SiteService } from '../../../_service/site.service';
 import {
   approchType,
+  averageRout,
   direction,
   equipment,
   equipmentQuality,
@@ -13,6 +14,7 @@ import {
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SiteCredential } from '../../../_models/i-site';
+import { SecteurCredential } from '../../../_models/i-secteur';
 
 @Component({
   selector: 'app-create',
@@ -28,22 +30,27 @@ export class CreateComponent implements OnInit {
   profils: routProfil[] = [];
   approachTypes: approchType[] = [];
   equipmentQualityList: equipmentQuality[] = [];
+  averageRoutNumberList: averageRout[] = [];
   parkingAlternatif: boolean = false;
+  modalSecteur: boolean = false;
+  nbSecteur: number = 1;
+  siteSecteur: SecteurCredential[] = [];
 
   constructor(private siteService: SiteService) {
     this.createForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      minimumLevel: new FormControl(''),
-      maximumLevel: new FormControl(''),
-      approachTime: new FormControl(''),
-      approachType: new FormControl(''),
-      equipment: new FormControl(''),
-      equimentQuality: new FormControl(''),
-      direction: new FormControl(''),
-      rockType: new FormControl(''),
-      routProfil: new FormControl(''),
-      latitudeP1: new FormControl(''),
-      longitudeP1: new FormControl(''),
+      minimumLevel: new FormControl('', Validators.required),
+      maximumLevel: new FormControl('', Validators.required),
+      approachTime: new FormControl('', Validators.required),
+      approachType: new FormControl('', Validators.required),
+      equipment: new FormControl('', Validators.required),
+      equimentQuality: new FormControl('', Validators.required),
+      direction: new FormControl('', Validators.required),
+      rockType: new FormControl('', Validators.required),
+      routProfil: new FormControl('', Validators.required),
+      averageRout: new FormControl('', Validators.required),
+      latitudeP1: new FormControl('', Validators.required),
+      longitudeP1: new FormControl('', Validators.required),
       latitudeP2: new FormControl(null),
       longitudeP2: new FormControl(null),
       reseau4g: new FormControl(false),
@@ -63,6 +70,7 @@ export class CreateComponent implements OnInit {
         this.approachTypes = data.approchTypeList;
         this.equipments = data.equipmentList;
         this.equipmentQualityList = data.equipmentQualityList;
+        this.averageRoutNumberList = data.averageRoutNumberList;
       },
       error: err => console.log(err),
     });
@@ -70,6 +78,53 @@ export class CreateComponent implements OnInit {
   addParkingAlternatif($event: any) {
     $event.preventDefault();
     this.parkingAlternatif = !this.parkingAlternatif;
+  }
+  infoGeneraleValidate(): boolean {
+    return (
+      this.createForm.controls['name'].valid &&
+      this.createForm.controls['minimumLevel'].valid &&
+      this.createForm.controls['maximumLevel'].valid
+    );
+  }
+  infoApproachValidate(): boolean {
+    return (
+      this.createForm.controls['approachTime'].valid &&
+      this.createForm.controls['approachType'].valid
+    );
+  }
+  infoEquipmentValidate(): boolean {
+    return (
+      this.createForm.controls['equipment'].valid &&
+      this.createForm.controls['equimentQuality'].valid
+    );
+  }
+  infoRoutAndRockValidate(): boolean {
+    return (
+      this.createForm.controls['rockType'].valid &&
+      this.createForm.controls['routProfil'].valid &&
+      this.createForm.controls['direction'].valid
+    );
+  }
+  infoParkingValidate(): boolean {
+    return (
+      this.createForm.controls['latitudeP1'].valid &&
+      this.createForm.controls['longitudeP1'].valid
+    );
+  }
+  allInfoValidate(): boolean {
+    return (
+      this.infoGeneraleValidate() &&
+      this.infoRoutAndRockValidate() &&
+      this.infoApproachValidate() &&
+      this.infoParkingValidate() &&
+      this.infoEquipmentValidate()
+    );
+  }
+
+  getSecteurs(secteur: SecteurCredential[]) {
+    this.modalSecteur = !this.modalSecteur;
+    this.siteSecteur = secteur;
+    console.log(secteur);
   }
 
   onSubmit($event: any) {
@@ -85,6 +140,8 @@ export class CreateComponent implements OnInit {
       this.createForm.controls['direction'].value,
       this.createForm.controls['rockType'].value,
       this.createForm.controls['routProfil'].value,
+      this.createForm.controls['averageRout'].value,
+      this.nbSecteur,
       this.createForm.controls['latitudeP1'].value,
       this.createForm.controls['longitudeP1'].value,
       this.createForm.controls['latitudeP2'].value,
@@ -94,6 +151,15 @@ export class CreateComponent implements OnInit {
       this.createForm.controls['toilette'].value,
       this.createForm.controls['river'].value
     );
+    console.log('--- submit---');
     console.log(credentials);
+    console.log(this.siteSecteur);
+    // console.log(this.nbSecteur);
+  }
+
+  addSecteur($event: any) {
+    $event.preventDefault();
+    console.log('modale');
+    this.modalSecteur = !this.modalSecteur;
   }
 }

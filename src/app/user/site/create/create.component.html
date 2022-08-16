@@ -35,130 +35,168 @@
         </div>
       </div>
     </fieldset>
+    <div *ngIf="infoGeneraleValidate()">
+      <fieldset class="fielset">
+        <legend class="has-text-centered subtitle is-4">
+          Info marche d'approche
+        </legend>
+        <div class="container-fielset">
+          <div class="field">
+            <label class="label"
+              >Temps d'approche
+              <input
+                type="number"
+                name="temps"
+                class="input width-input"
+                formControlName="approachTime"
+            /></label>
+          </div>
+          <div class="select is-medium">
+            <select formControlName="approachType">
+              <option value="">Type d'approche</option>
+              <option
+                *ngFor="let type of approachTypes"
+                value="{{ type.idApprochType }}">
+                {{ type.type }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div *ngIf="infoApproachValidate()">
+      <fieldset class="fielset">
+        <legend class="has-text-centered subtitle is-4">
+          Info sur l'equipement en place
+        </legend>
+        <div class="container-fielset">
+          <div class="select is-medium">
+            <select formControlName="equipment">
+              <option value="">Equipement en place</option>
+              <option
+                *ngFor="let equipment of equipments"
+                value="{{ equipment.idEquipment }}">
+                {{ equipment.libelle }}
+              </option>
+            </select>
+          </div>
+          <div class="select is-medium width-select">
+            <select formControlName="equimentQuality">
+              <option value="">Qualite de l'equipement</option>
+              <option
+                *ngFor="let quality of equipmentQualityList"
+                value="{{ quality.idEquipmentQuality }}">
+                {{ quality.quality }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div *ngIf="infoEquipmentValidate()">
+      <fieldset class="fielset">
+        <legend class="has-text-centered subtitle is-4">
+          Info exposition et rocher
+        </legend>
+        <div class="container-fielset">
+          <div class="select is-medium">
+            <select formControlName="direction">
+              <option value="">Exposition</option>
+              <option
+                *ngFor="let exposition of directions"
+                value="{{ exposition.idDirections }}">
+                {{ exposition.direction }}
+              </option>
+            </select>
+          </div>
+          <div class="select is-medium">
+            <select formControlName="rockType">
+              <option value="">Type de rocher</option>
+              <option
+                *ngFor="let type of rockTypes"
+                value="{{ type.idRockType }}">
+                {{ type.type }}
+              </option>
+            </select>
+          </div>
+          <div class="select is-medium">
+            <select formControlName="routProfil">
+              <option value="">Profil des voies</option>
+              <option
+                *ngFor="let profil of profils"
+                value="{{ profil.idRoutProfil }}">
+                {{ profil.profil }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div *ngIf="infoRoutAndRockValidate()">
     <fieldset class="fielset">
       <legend class="has-text-centered subtitle is-4">
-        Info marche d'approche
+        Info Voies et Secteurs
       </legend>
       <div class="container-fielset">
+        <div class="select is-medium">
+          <select formControlName="averageRout">
+            <option value="">Nombre de voies</option>
+            <option
+              *ngFor="let rout of averageRoutNumberList"
+              value="{{ rout.idAverageRoutNumber }}">
+              {{ rout.libelle }}
+            </option>
+          </select>
+        </div>
         <div class="field">
           <label class="label"
-            >Temps d'approche
-            <input
-              type="number"
-              name="temps"
-              class="input width-input"
-              formControlName="approachTime"
-          /></label>
-        </div>
-        <div class="select is-medium">
-          <select formControlName="approachType">
-            <option value="">Type d'approche</option>
-            <option
-              *ngFor="let type of approachTypes"
-              value="{{ type.idApprochType }}">
-              {{ type.type }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </fieldset>
-    <fieldset class="fielset">
-      <legend class="has-text-centered subtitle is-4">
-        Info sur l'equipement en place
-      </legend>
-      <div class="container-fielset">
-        <div class="select is-medium">
-          <select formControlName="equipment">
-            <option value="">Equipement en place</option>
-            <option
-              *ngFor="let equipment of equipments"
-              value="{{ equipment.idEquipment }}">
-              {{ equipment.libelle }}
-            </option>
-          </select>
-        </div>
-        <div class="select is-medium width-select">
-          <select formControlName="equimentQuality">
-            <option value="">Qualite de l'equipement</option>
-            <option
-              *ngFor="let quality of equipmentQualityList"
-              value="{{ quality.idEquipmentQuality }}">
-              {{ quality.quality }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </fieldset>
-    <fieldset class="fielset">
-      <legend class="has-text-centered subtitle is-4">
-        Info exposition et rocher
-      </legend>
-      <div class="container-fielset">
-        <div class="select is-medium">
-          <select formControlName="direction">
-            <option value="">Exposition</option>
-            <option
-              *ngFor="let exposition of directions"
-              value="{{ exposition.idDirections }}">
-              {{ exposition.direction }}
-            </option>
-          </select>
-        </div>
-        <div class="select is-medium">
-          <select formControlName="rockType">
-            <option value="">Type de rocher</option>
-            <option
-              *ngFor="let type of rockTypes"
-              value="{{ type.idRockType }}">
-              {{ type.type }}
-            </option>
-          </select>
-        </div>
-        <div class="select is-medium">
-          <select formControlName="routProfil">
-            <option value="">Profil des voies</option>
-            <option
-              *ngFor="let profil of profils"
-              value="{{ profil.idRoutProfil }}">
-              {{ profil.profil }}
-            </option>
-          </select>
+            >Nombre de secteurs :{{ nbSecteur }}
+            <button class="button is-rounded" (click)="addSecteur($event)">
+              +
+            </button>
+          </label>
         </div>
       </div>
     </fieldset>
   </div>
-  <fieldset class="fielset">
-    <legend class="has-text-centered subtitle is-4">Info Geoloc Parking</legend>
-    <div class="container-fielset">
-      <div class="field">
-        <label class="label"
-          >latitude
-          <input
-            type="number"
-            name="latitudeP1"
-            class="input width-input"
-            formControlName="latitudeP1"
-        /></label>
+
+  <div *ngIf="createForm.controls['averageRout'].valid">
+    <fieldset class="fielset">
+      <legend class="has-text-centered subtitle is-4">
+        Info Geoloc Parking
+      </legend>
+      <div class="container-fielset">
+        <div class="field">
+          <label class="label"
+            >latitude
+            <input
+              type="number"
+              name="latitudeP1"
+              class="input width-input"
+              formControlName="latitudeP1"
+          /></label>
+        </div>
+        <div class="control">
+          <button
+            class="button is-link is-light is-rounded"
+            (click)="addParkingAlternatif($event)">
+            Parking alternatif ?
+          </button>
+        </div>
+        <div class="field">
+          <label class="label"
+            >longitude
+            <input
+              type="number"
+              name="longitudeP1"
+              class="input width-input"
+              formControlName="longitudeP1"
+          /></label>
+        </div>
       </div>
-      <div class="control">
-        <button
-          class="button is-link is-light is-rounded"
-          (click)="addParkingAlternatif($event)">
-          Parking alternatif ?
-        </button>
-      </div>
-      <div class="field">
-        <label class="label"
-          >longitude
-          <input
-            type="number"
-            name="longitudeP1"
-            class="input width-input"
-            formControlName="longitudeP1"
-        /></label>
-      </div>
-    </div>
-  </fieldset>
+    </fieldset>
+  </div>
   <div *ngIf="parkingAlternatif">
     <fieldset class="fielset">
       <legend class="has-text-centered subtitle is-4">
@@ -188,40 +226,45 @@
       </div>
     </fieldset>
   </div>
-  <fieldset class="fielset">
-    <legend class="has-text-centered subtitle is-4">
-      Info confort parking
-    </legend>
-    <div class="container-fielset">
-      <div class="">
-        <label class="checkbox label">
-          <input type="checkbox" formControlName="reseau4g" />
-          Reseau 4G
-        </label>
+  <div *ngIf="infoParkingValidate()">
+    <fieldset class="fielset">
+      <legend class="has-text-centered subtitle is-4">
+        Info confort parking
+      </legend>
+      <div class="container-fielset">
+        <div class="">
+          <label class="checkbox label">
+            <input type="checkbox" formControlName="reseau4g" />
+            Reseau 4G
+          </label>
+        </div>
+        <div class="">
+          <label class="checkbox label">
+            <input type="checkbox" formControlName="water" />
+            Eau Potable
+          </label>
+        </div>
+        <div class="">
+          <label class="checkbox label">
+            <input type="checkbox" formControlName="toilette" />
+            Toilette
+          </label>
+        </div>
+        <div class="">
+          <label class="checkbox label">
+            <input type="checkbox" formControlName="river" />
+            Lac ou riviere
+          </label>
+        </div>
       </div>
-      <div class="">
-        <label class="checkbox label">
-          <input type="checkbox" formControlName="water" />
-          Eau Potable
-        </label>
-      </div>
-      <div class="">
-        <label class="checkbox label">
-          <input type="checkbox" formControlName="toilette" />
-          Toilette
-        </label>
-      </div>
-      <div class="">
-        <label class="checkbox label">
-          <input type="checkbox" formControlName="river" />
-          Lac ou riviere
-        </label>
-      </div>
-    </div>
-  </fieldset>
+    </fieldset>
+  </div>
   <div class="field is-grouped is-justify-content-center mt-6">
     <div class="control">
-      <button class="button is-link is-medium" (click)="onSubmit($event)">
+      <button
+        class="button is-link is-medium"
+        (click)="onSubmit($event)"
+        [disabled]="!allInfoValidate()">
         Suivant
       </button>
     </div>
@@ -230,3 +273,14 @@
     </div>
   </div>
 </form>
+<div id="modal-secteur" class="modal" [ngClass]="{ 'is-active': modalSecteur }">
+  <div class="modal-background" (click)="addSecteur($event)"></div>
+  <div class="modal-content">
+    <div class="box">
+      <p>Ajout de secteur</p>
+      <app-create-secteur
+        (nbSecteur)="nbSecteur = $event"
+        (siteSecteur)="getSecteurs($event)"></app-create-secteur>
+    </div>
+  </div>
+</div>
