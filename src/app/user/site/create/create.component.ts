@@ -22,6 +22,8 @@ import { SecteurCredential } from '../../../_models/i-secteur';
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
+  validateMessage: string = '';
+  validateTaost: boolean = false;
   createForm: FormGroup;
   levels: level[] = [];
   directions: direction[] = [];
@@ -34,7 +36,11 @@ export class CreateComponent implements OnInit {
   parkingAlternatif: boolean = false;
   modalSecteur: boolean = false;
   nbSecteur: number = 1;
-  siteSecteur: SecteurCredential[] = [];
+  siteSecteur: SecteurCredential[] = [
+    {
+      name: 'Principal',
+    },
+  ];
 
   constructor(private siteService: SiteService) {
     this.createForm = new FormGroup({
@@ -49,6 +55,7 @@ export class CreateComponent implements OnInit {
       rockType: new FormControl('', Validators.required),
       routProfil: new FormControl('', Validators.required),
       averageRout: new FormControl('', Validators.required),
+      averageHeight: new FormControl('', Validators.required),
       latitudeP1: new FormControl('', Validators.required),
       longitudeP1: new FormControl('', Validators.required),
       latitudeP2: new FormControl(null),
@@ -111,6 +118,12 @@ export class CreateComponent implements OnInit {
       this.createForm.controls['longitudeP1'].valid
     );
   }
+  infoHauteurSecteurValidate() {
+    return (
+      this.createForm.controls['averageRout'].valid &&
+      this.createForm.controls['averageHeight'].valid
+    );
+  }
   allInfoValidate(): boolean {
     return (
       this.infoGeneraleValidate() &&
@@ -141,6 +154,7 @@ export class CreateComponent implements OnInit {
       this.createForm.controls['rockType'].value,
       this.createForm.controls['routProfil'].value,
       this.createForm.controls['averageRout'].value,
+      this.createForm.controls['averageHeight'].value,
       this.nbSecteur,
       this.createForm.controls['latitudeP1'].value,
       this.createForm.controls['longitudeP1'].value,
@@ -149,12 +163,22 @@ export class CreateComponent implements OnInit {
       this.createForm.controls['reseau4g'].value,
       this.createForm.controls['water'].value,
       this.createForm.controls['toilette'].value,
-      this.createForm.controls['river'].value
+      this.createForm.controls['river'].value,
+      this.siteSecteur
     );
-    console.log('--- submit---');
-    console.log(credentials);
-    console.log(this.siteSecteur);
-    // console.log(this.nbSecteur);
+
+    this.siteService.create(credentials).subscribe({
+      next: data => {
+        this.validateTaost = true;
+        this.validateMessage = data.data;
+        setTimeout(() => {
+          this.validateTaost = false;
+        }, 3000);
+      },
+      error: err => {
+        console.log(err);
+      },
+    });
   }
 
   addSecteur($event: any) {

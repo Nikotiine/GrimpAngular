@@ -1,1 +1,32 @@
-<p>all works!</p>
+<p class="has-text-centered title is-3 mt-6">Liste des sites disponibles</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nom du Site</th>
+      <th>Niveau mini</th>
+      <th>Niveau maxi</th>
+      <th>Exposition</th>
+      <th>Type de Rocher</th>
+      <th>Nombre de lignes</th>
+      <th>Hauteur Moyenne</th>
+      <th>Temps d'approche</th>
+      <th>Afficher sur la carte</th>
+      <th>Voir le detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let site of listeDesSites">
+      <td>{{ site.name }}</td>
+      <td>{{ site.minimumLevel.designation }}</td>
+      <td>{{ site.maximumLevel.designation }}</td>
+      <td>{{ site.direction.direction }}</td>
+      <td>{{ site.rockType.type }}</td>
+      <td>{{ site.averageRoutNumber.libelle }}</td>
+      <td>{{ site.averageHeight }} m</td>
+      <td>{{ site.approachTime }} minutes</td>
+      <td>-----</td>
+      <td><a [routerLink]="['/user/site/detail', site.idSpot]">voir</a></td>
+    </tr>
+  </tbody>
+</table>

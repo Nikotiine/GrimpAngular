@@ -151,6 +151,16 @@
         </div>
         <div class="field">
           <label class="label"
+            >Hauteur Moyenne
+            <input
+              type="number"
+              name="hauteur"
+              class="input width-input"
+              formControlName="averageHeight"
+          /></label>
+        </div>
+        <div class="field">
+          <label class="label"
             >Nombre de secteurs :{{ nbSecteur }}
             <button class="button is-rounded" (click)="addSecteur($event)">
               +
@@ -161,7 +171,7 @@
     </fieldset>
   </div>
 
-  <div *ngIf="createForm.controls['averageRout'].valid">
+  <div *ngIf="infoHauteurSecteurValidate()">
     <fieldset class="fielset">
       <legend class="has-text-centered subtitle is-4">
         Info Geoloc Parking
@@ -284,3 +294,6 @@
     </div>
   </div>
 </div>
+<app-validate-toast
+  [message]="validateMessage"
+  *ngIf="validateTaost"></app-validate-toast>
