@@ -33,6 +33,82 @@ export interface ISite {
   rockType: rockType;
   routProfil: routProfil;
   averageRoutNumber: averageRout;
+  secteurs?: ISecteur[];
+}
+export class SiteDto implements ISite {
+  approachTime: number = 0;
+  approchType: approchType;
+  averageHeight: number;
+  averageRoutNumber: averageRout;
+  direction: direction;
+  equipment: equipment;
+  equipmentQuality: equipmentQuality;
+  idSpot: number;
+  latitudeP1: number;
+  latitudeP2: number;
+  longitudeP1: number;
+  longitudeP2: number;
+  maximumLevel: level;
+  minimumLevel: level;
+  name: string;
+  nbSecteur: number;
+  reseau4g: boolean;
+  river: boolean;
+  rockType: rockType;
+  routProfil: routProfil;
+  secteurs: ISecteur[];
+  toilette: boolean;
+  water: boolean;
+
+  constructor(
+    approachTime: number,
+    approchType: approchType,
+    averageHeight: number,
+    averageRoutNumber: averageRout,
+    direction: direction,
+    equipment: equipment,
+    equipmentQuality: equipmentQuality,
+    idSpot: number,
+    latitudeP1: number,
+    latitudeP2: number,
+    longitudeP1: number,
+    longitudeP2: number,
+    maximumLevel: level,
+    minimumLevel: level,
+    name: string,
+    nbSecteur: number,
+    reseau4g: boolean,
+    river: boolean,
+    rockType: rockType,
+    routProfil: routProfil,
+    secteurs: ISecteur[],
+    toilette: boolean,
+    water: boolean
+  ) {
+    this.approachTime = approachTime;
+    this.approchType = approchType;
+    this.averageHeight = averageHeight;
+    this.averageRoutNumber = averageRoutNumber;
+    this.direction = direction;
+    this.equipment = equipment;
+    this.equipmentQuality = equipmentQuality;
+    this.idSpot = idSpot;
+    this.latitudeP1 = latitudeP1;
+    this.latitudeP2 = latitudeP2;
+    this.longitudeP1 = longitudeP1;
+    this.longitudeP2 = longitudeP2;
+    this.maximumLevel = maximumLevel;
+    this.minimumLevel = minimumLevel;
+    this.name = name;
+    this.nbSecteur = nbSecteur;
+    this.reseau4g = reseau4g;
+    this.river = river;
+    this.rockType = rockType;
+    this.routProfil = routProfil;
+    this.secteurs = secteurs;
+    this.toilette = toilette;
+    this.water = water;
+  }
 }
 export interface ISiteCredential {
   name: string;

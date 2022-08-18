@@ -1,1 +1,12 @@
-<p>detail works!</p>
+<div class="box mt-6">
+  <h2 class="title is-4 has-text-centered">{{ spot ? spot.name : '' }}</h2>
+  <p>
+    Niveau mini : {{ spot ? spot.minimumLevel.designation : '' }} --- Niveau
+    maxi : {{ spot ? spot.maximumLevel.designation : '' }}
+  </p>
+  <p>Exposition : {{ spot ? spot.direction.direction : '' }}</p>
+  <p>
+    Equipement en place : {{ spot ? spot.equipment.libelle : '' }} engagement :
+    {{ spot ? spot.equipmentQuality.quality : '' }}
+  </p>
+</div>

@@ -14,6 +14,7 @@
               type="text"
               name="name"
               class="input width-input"
+              [ngClass]="{ 'is-danger': createForm.controls['name'].errors }"
               formControlName="name"
           /></label>
         </div>
@@ -171,7 +172,7 @@
     </fieldset>
   </div>
 
-  <div *ngIf="infoHauteurSecteurValidate()">
+  <div>
     <fieldset class="fielset">
       <legend class="has-text-centered subtitle is-4">
         Info Geoloc Parking
@@ -184,8 +185,15 @@
               type="number"
               name="latitudeP1"
               class="input width-input"
+              [ngClass]="{
+                'is-danger': latitudeIsInvalide()
+              }"
               formControlName="latitudeP1"
+              step="any"
           /></label>
+          <p class="help is-danger" *ngIf="latitudeIsInvalide()">
+            Format de latitude invalide
+          </p>
         </div>
         <div class="control">
           <button
@@ -202,7 +210,14 @@
               name="longitudeP1"
               class="input width-input"
               formControlName="longitudeP1"
+              step="any"
+              [ngClass]="{
+                'is-danger': longitudeIsInvalide()
+              }"
           /></label>
+          <p class="help is-danger" *ngIf="longitudeIsInvalide()">
+            Format de longitude invalide
+          </p>
         </div>
       </div>
     </fieldset>
@@ -221,6 +236,7 @@
               name="latitudeP2"
               class="input width-input"
               formControlName="latitudeP2"
+              step="any"
           /></label>
         </div>
         <div class="field">
@@ -231,6 +247,7 @@
               name="longitudeP2"
               class="input width-input"
               formControlName="longitudeP2"
+              step="any"
           /></label>
         </div>
       </div>

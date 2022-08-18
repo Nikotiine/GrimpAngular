@@ -8,6 +8,7 @@ import { IListPseudoMail } from '../_models/i-pseudo-mail-validator';
 })
 export class ValidatorService {
   private getAllPseudoAndMailUrl: string = 'api/public/validator';
+
   constructor(private http: HttpClient) {}
 
   getAllPseudoAndMail(): Observable<IListPseudoMail> {

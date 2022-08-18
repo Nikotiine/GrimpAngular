@@ -12,9 +12,18 @@ import {
   routProfil,
 } from '../../../_models/i-categorie';
 import { Observable } from 'rxjs';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { SiteCredential } from '../../../_models/i-site';
 import { SecteurCredential } from '../../../_models/i-secteur';
+import { Router } from '@angular/router';
+import { CreateSiteValidator } from '../../../_helpers/create.site.validator';
 
 @Component({
   selector: 'app-create',
@@ -41,10 +50,13 @@ export class CreateComponent implements OnInit {
       name: 'Principal',
     },
   ];
-
-  constructor(private siteService: SiteService) {
+  allName: string[] = [];
+  constructor(private siteService: SiteService, private router: Router) {
     this.createForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+      name: new FormControl('', [
+        Validators.required,
+        CreateSiteValidator.validateSpotName(this.allName),
+      ]),
       minimumLevel: new FormControl('', Validators.required),
       maximumLevel: new FormControl('', Validators.required),
       approachTime: new FormControl('', Validators.required),
@@ -56,8 +68,14 @@ export class CreateComponent implements OnInit {
       routProfil: new FormControl('', Validators.required),
       averageRout: new FormControl('', Validators.required),
       averageHeight: new FormControl('', Validators.required),
-      latitudeP1: new FormControl('', Validators.required),
-      longitudeP1: new FormControl('', Validators.required),
+      latitudeP1: new FormControl('', [
+        Validators.required,
+        CreateSiteValidator.validateLatitude(),
+      ]),
+      longitudeP1: new FormControl('', [
+        Validators.required,
+        CreateSiteValidator.validateLongitude(),
+      ]),
       latitudeP2: new FormControl(null),
       longitudeP2: new FormControl(null),
       reseau4g: new FormControl(false),
@@ -80,6 +98,14 @@ export class CreateComponent implements OnInit {
         this.averageRoutNumberList = data.averageRoutNumberList;
       },
       error: err => console.log(err),
+    });
+    this.siteService.getAllSpotName().subscribe({
+      next: data => {
+        this.allName = data;
+      },
+      error: err => {
+        console.log(err);
+      },
     });
   }
   addParkingAlternatif($event: any) {
@@ -133,6 +159,18 @@ export class CreateComponent implements OnInit {
       this.infoEquipmentValidate()
     );
   }
+  longitudeIsInvalide(): boolean {
+    return !!(
+      this.createForm.controls['longitudeP1'].dirty &&
+      this.createForm.controls['longitudeP1'].errors
+    );
+  }
+  latitudeIsInvalide(): boolean {
+    return !!(
+      this.createForm.controls['latitudeP1'].dirty &&
+      this.createForm.controls['latitudeP1'].errors
+    );
+  }
 
   getSecteurs(secteur: SecteurCredential[]) {
     this.modalSecteur = !this.modalSecteur;
@@ -170,9 +208,9 @@ export class CreateComponent implements OnInit {
     this.siteService.create(credentials).subscribe({
       next: data => {
         this.validateTaost = true;
-        this.validateMessage = data.data;
+        this.validateMessage = 'Site enregisté';
         setTimeout(() => {
-          this.validateTaost = false;
+          this.router.navigate(['/user/site/detail/' + data.id]);
         }, 3000);
       },
       error: err => {

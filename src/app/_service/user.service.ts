@@ -20,11 +20,9 @@ export class UserService {
     return this.http.get<User>(this.urlGetProfil + idUser);
   }
   editProfil(idUser: number, credential: EditCredential): Observable<User> {
-    console.log('edit profil');
     return this.http.put<User>(this.urlEditProfil + idUser, credential);
   }
   changePsw(idUser: number, credential: IChangePsw) {
-    console.log('change password');
     return this.http.put<any>(this.urlChangePsw + idUser, credential);
   }
   logout() {
