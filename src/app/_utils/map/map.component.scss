@@ -1,19 +1,5 @@
 .map-container {
-  position: absolute;
-  top: 5rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 30px;
-}
-
-.map-frame {
-  border: 2px solid black;
-  height: 100%;
-  width: 50%;
+  height: 400px;
+  width: 600px;
   margin: auto;
-}
-
-#map {
-  height: 100%;
 }

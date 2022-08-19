@@ -9,4 +9,6 @@
     Equipement en place : {{ spot ? spot.equipment.libelle : '' }} engagement :
     {{ spot ? spot.equipmentQuality.quality : '' }}
   </p>
+  <p>{{ spot ? spot.longitudeP1 : '' }} -- {{ spot ? spot.latitudeP1 : '' }}</p>
 </div>
+<app-map></app-map>

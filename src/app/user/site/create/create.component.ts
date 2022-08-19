@@ -53,10 +53,7 @@ export class CreateComponent implements OnInit {
   allName: string[] = [];
   constructor(private siteService: SiteService, private router: Router) {
     this.createForm = new FormGroup({
-      name: new FormControl('', [
-        Validators.required,
-        CreateSiteValidator.validateSpotName(this.allName),
-      ]),
+      name: new FormControl('', Validators.required),
       minimumLevel: new FormControl('', Validators.required),
       maximumLevel: new FormControl('', Validators.required),
       approachTime: new FormControl('', Validators.required),
@@ -76,8 +73,11 @@ export class CreateComponent implements OnInit {
         Validators.required,
         CreateSiteValidator.validateLongitude(),
       ]),
-      latitudeP2: new FormControl(null),
-      longitudeP2: new FormControl(null),
+      latitudeP2: new FormControl(null, CreateSiteValidator.validateLatitude()),
+      longitudeP2: new FormControl(
+        null,
+        CreateSiteValidator.validateLongitude()
+      ),
       reseau4g: new FormControl(false),
       water: new FormControl(false),
       toilette: new FormControl(false),
@@ -144,7 +144,7 @@ export class CreateComponent implements OnInit {
       this.createForm.controls['longitudeP1'].valid
     );
   }
-  infoHauteurSecteurValidate() {
+  infoHauteurSecteurValidate(): boolean {
     return (
       this.createForm.controls['averageRout'].valid &&
       this.createForm.controls['averageHeight'].valid

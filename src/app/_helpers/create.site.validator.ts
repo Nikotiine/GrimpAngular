@@ -26,17 +26,4 @@ export class CreateSiteValidator {
       };
     };
   }
-  static validateSpotName(allSite: string[]): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const value = control.value;
-      console.log(value);
-      console.log(allSite);
-      if (!allSite.includes(value)) {
-        return null;
-      }
-      return {
-        nameIsTaken: true,
-      };
-    };
-  }
 }
