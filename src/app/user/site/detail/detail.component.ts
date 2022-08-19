@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class DetailComponent implements OnInit {
   idSpot: number = 0;
-
+  geolocSite: number[] = [];
   spot?: ISite;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,6 +25,7 @@ export class DetailComponent implements OnInit {
     this.siteService.getSpotDetail(this.idSpot).subscribe({
       next: data => {
         this.spot = data;
+        this.geolocSite = [data.latitudeP1, data.longitudeP1];
       },
       error: err => {
         console.log(err);

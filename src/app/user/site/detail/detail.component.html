@@ -1,14 +1,93 @@
 <div class="box mt-6">
-  <h2 class="title is-4 has-text-centered">{{ spot ? spot.name : '' }}</h2>
-  <p>
-    Niveau mini : {{ spot ? spot.minimumLevel.designation : '' }} --- Niveau
-    maxi : {{ spot ? spot.maximumLevel.designation : '' }}
-  </p>
-  <p>Exposition : {{ spot ? spot.direction.direction : '' }}</p>
-  <p>
-    Equipement en place : {{ spot ? spot.equipment.libelle : '' }} engagement :
-    {{ spot ? spot.equipmentQuality.quality : '' }}
-  </p>
-  <p>{{ spot ? spot.longitudeP1 : '' }} -- {{ spot ? spot.latitudeP1 : '' }}</p>
+  <h2 class="title is-3 has-text-centered">{{ spot ? spot.name : '' }}</h2>
 </div>
-<app-map></app-map>
+<div class="is-flex is-justify-content-space-around">
+  <article class="message is-info">
+    <div class="message-header">
+      <p>Information Generale</p>
+    </div>
+    <div class="message-body">
+      Niveau mini :
+      <strong>{{ spot ? spot.minimumLevel.designation : '' }}</strong
+      ><br />
+      Niveau maxi :
+      <strong>{{ spot ? spot.maximumLevel.designation : '' }}</strong
+      ><br />
+      Exposition : <strong>{{ spot ? spot.direction.direction : '' }}</strong
+      ><br />
+      Type de rocher : <strong>{{ spot ? spot.rockType.type : '' }}</strong
+      ><br />
+    </div>
+  </article>
+  <article class="message is-info">
+    <div class="message-header">
+      <p>Approche</p>
+    </div>
+    <div class="message-body">
+      Temps d'approche :
+      <strong>{{ spot ? spot.approachTime : '' }} minutes</strong><br />
+      Type d'approche :
+      <strong>{{ spot ? spot.approchType.type : '' }}</strong
+      ><br />
+      Profil general des voies :
+      <strong>{{ spot ? spot.routProfil.profil : '' }}</strong
+      ><br />
+    </div>
+  </article>
+  <article class="message is-info">
+    <div class="message-header">
+      <p>Voies</p>
+    </div>
+    <div class="message-body">
+      Nombres de voies :
+      <strong>{{ spot ? spot.averageRoutNumber.libelle : '' }}</strong
+      ><br />
+      Hauteur Moyenne :
+      <strong>{{ spot ? spot.averageHeight : '' }} metres</strong><br />
+      Equipement en place :
+      <strong>{{ spot ? spot.equipment.libelle : '' }}</strong
+      ><br />
+      engagement :
+      <strong>{{ spot ? spot.equipmentQuality.quality : '' }}</strong
+      ><br />
+    </div>
+  </article>
+  <article class="message is-info">
+    <div class="message-header">
+      <p>Secteur</p>
+    </div>
+    <div class="message-body">
+      Nombres de secteur :
+      <strong>{{ spot ? spot.nbSecteur : '' }}</strong
+      ><br />
+      <div *ngFor="let name of spot?.secteurs">
+        <p>nom du secteur : {{ name ? name.name : '' }}</p>
+      </div>
+    </div>
+  </article>
+  <article class="message is-dark mb-5">
+    <div class="message-header">
+      <p>Parking</p>
+    </div>
+    <div class="message-body">
+      Confort : <br />
+      toilette :<strong>{{
+        spot ? (spot.toilette ? 'accesible' : 'non') : ''
+      }}</strong
+      ><br />
+      Eau potable :<strong>{{
+        spot ? (spot.toilette ? 'a proximité' : 'non') : ''
+      }}</strong
+      ><br />
+      Reseau 4G :<strong>{{
+        spot ? (spot.toilette ? 'Oui ' : 'Non c est paume') : ''
+      }}</strong
+      ><br />
+      Lac ou rivere :<strong>{{
+        spot ? (spot.toilette ? 'a proximité' : 'non') : ''
+      }}</strong
+      ><br />
+    </div>
+  </article>
+</div>
+<app-map [geolocSite]="geolocSite"></app-map>

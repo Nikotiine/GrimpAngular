@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import * as Leaflet from 'leaflet';
 
 Leaflet.Icon.Default.imagePath = 'assets/';
@@ -7,7 +13,8 @@ Leaflet.Icon.Default.imagePath = 'assets/';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent {
+export class MapComponent implements OnChanges {
+  @Input() geolocSite: number[] = [];
   map!: Leaflet.Map;
   markers: Leaflet.Marker[] = [];
   options = {
@@ -24,15 +31,7 @@ export class MapComponent {
   initMarkers() {
     const initialMarkers = [
       {
-        position: { lat: 28.625485, lng: 79.821091 },
-        draggable: true,
-      },
-      {
-        position: { lat: 28.625293, lng: 79.817926 },
-        draggable: false,
-      },
-      {
-        position: { lat: 28.625182, lng: 79.81464 },
+        position: { lat: this.geolocSite[0], lng: this.geolocSite[1] },
         draggable: true,
       },
     ];
@@ -55,7 +54,6 @@ export class MapComponent {
 
   onMapReady($event: Leaflet.Map) {
     this.map = $event;
-    // this.initMarkers();
   }
 
   mapClicked($event: any) {
@@ -68,5 +66,11 @@ export class MapComponent {
 
   markerDragEnd($event: any, index: number) {
     console.log($event.target.getLatLng());
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.geolocSite[0] !== undefined && this.geolocSite[1] !== undefined) {
+      this.initMarkers();
+    }
   }
 }
